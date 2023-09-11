@@ -1,0 +1,29 @@
+<div>
+  <h3><%= @user.name %></h3>
+</div>
+
+<!-- ユーザーの投稿一覧 -->
+
+<div class="container px-5 px-sm-0 cake-font">
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <h2>レシピ一覧</h2>
+      <div class="row">
+        <% @recipes.each do |recipe| %>
+          <div class="col-md-6">
+            <div class="card-deck">
+              <div class="card" style="width:22rem">
+                <%= link_to recipe_path(recipe.id) do %>
+                  <p class="img"><%= image_tag recipe.image, format: "jpg", size: "359x250" %></p>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= recipe.name %></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <div class="d-flex">
+        <div class="mr-5">
+          <%= image_tag @recipe.image, size: "450x300" %>
+        </div>
+        <div class="col-md-8">
+          <h4><%= @recipe.name %></h4>
+          <p><%= @recipe.explanation %></p>
+          <p><%= @recipe.comment %></p>
+          <%= link_to "編集", edit_recipe_path(@recipe.id) %>
+          <% if @recipe.user == current_user %>
+            <%= link_to "削除", recipe_path(@recipe), method: :delete %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
