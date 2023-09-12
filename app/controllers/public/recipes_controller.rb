@@ -1,7 +1,7 @@
 class Public::RecipesController < ApplicationController
   
   def index
-    @recipes = Recipe.all  
+    @recipes = Recipe.all
   end 
   
   def new
@@ -11,6 +11,7 @@ class Public::RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     @post_comment = PostComment.new
+    @user = @recipe.user
   end
   
   def edit
@@ -23,7 +24,7 @@ class Public::RecipesController < ApplicationController
     # 3. データをデータベースに保存するためのsaveメソッド実行
     recipe.save
     # 4. トップ画面へリダイレクト
-    redirect_to recipes_path(recipe.id)
+    redirect_to recipes_path
   end 
   
   def destroy
@@ -35,7 +36,7 @@ class Public::RecipesController < ApplicationController
   def update
     recipe = Recipe.find(params[:id])
     recipe.update(recipe_params)
-    redirect_to recipe_path(recipe.id)  
+    redirect_to recipe_path(recipe.id)
   end 
   
   private

@@ -7,6 +7,17 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_one_attached :profile_image
+  
+  def get_profile_image(width, height)
+    if profile_image.attached?
+      profile_image.variant(resize: "#{width}x#{height}").processed
+    else
+      # プロファイル画像が添付されていない場合、デフォルト画像を表示するか、何か別の処理を行うことができます
+      # この例ではデフォルト画像のパスを返します
+      ActionController::Base.helpers.image_path('no_image.jpg')
+    end
+  end
   
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy

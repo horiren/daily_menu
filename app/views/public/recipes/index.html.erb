@@ -10,8 +10,20 @@
                 <%= link_to recipe_path(recipe) do %>
                   <p class="img"><%= image_tag recipe.image, format: "jpg", size: "359x250" %></p>
                 <% end %>
-                <div class="card-body">
+                <div class="card-body text-center">
+                  <p>
+                    <% if recipe.user.profile_image.attached? %>
+                      <%= image_tag recipe.user.profile_image, size: "70x70" %>
+                    <% else %>
+                      <%= image_tag 'no_image', size: "70x70" %>
+                    <% end %>
+                    <%= recipe.user.name %>
+                  </p>
                   <h5 class="card-title"><%= recipe.name %></h5>
+                  <p>
+                    <%= link_to "#{recipe.post_comments.count} コメント", recipe_path(recipe.id) %>
+                    <%= link_to "#{recipe.favorites.count} いいね", recipe_path(recipe.id) %>
+                  </p>
                 </div>
               </div>
             </div>
