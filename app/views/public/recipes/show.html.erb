@@ -1,62 +1,55 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-8 offset-md-1">
-      <p>
-        <% if @user.profile_image.attached? %>
-          <%= image_tag @user.profile_image, size: "300x300" %>
-        <% else %>
-          <%= image_tag 'no_image', size: "300x300" %>
-        <% end %>
-        <h3><%= @user.name %></h3>
-      </p>
+    <div class="col-md-9 offset-md-1">
+      <%= image_tag @recipe.image, size: "550x400" %>
+      <div><h4><%= @recipe.name %></h4></div>
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, size: "100x100" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
+      <h3><%= @user.name %></h3>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8 offset-md-1">
-      <div class="d-flex">
-        <div class="mr-5">
-          <%= image_tag @recipe.image, size: "450x300" %>
-        </div>
-        <div class="col-md-8">
-          <h4><%= @recipe.name %></h4>
-          <p><%= @recipe.explanation %></p>
-          <p><%= @recipe.comment %></p>
-          <%= link_to "編集", edit_recipe_path(@recipe.id) %>
-          <% if @recipe.user == current_user %>
-            <%= link_to "削除", recipe_path(@recipe), method: :delete %>
-          <% end %>
-        </div>
-        <% if @recipe.favorited_by?(current_user) %>
-          <p>
-            <%= link_to recipe_favorites_path(@recipe), method: :delete do %>
-              ♥<%= @recipe.favorites.count %> いいね
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to recipe_favorites_path(@recipe), method: :post do %>
-              ♡<%= @recipe.favorites.count %> いいね
-            <% end %>
-          </p>
+    <div class="col-md-8">
+      <h4><%= @recipe.name %></h4>
+      <p><%= @recipe.explanation %></p>
+      <p><%= @recipe.comment %></p>
+      <%= link_to "編集", edit_recipe_path(@recipe.id) %>
+      <% if @recipe.user == current_user %>
+        <%= link_to "削除", recipe_path(@recipe), method: :delete %>
+      <% end %>
+    </div>
+    <% if @recipe.favorited_by?(current_user) %>
+      <p>
+        <%= link_to recipe_favorites_path(@recipe), method: :delete do %>
+          ♥<%= @recipe.favorites.count %> いいね
         <% end %>
-        <div>
-          <p>コメント件数：<%= @recipe.post_comments.count %></p>
-          <% @recipe.post_comments.each do |post_comment| %>
-            <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-            <%= post_comment.user.name %>
-            <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-            <% if post_comment.user == current_user %>
-              <%= link_to "削除", recipe_post_comment_path(post_comment.recipe, post_comment), method: :delete %>
-            <% end %>
-          <% end %>
-        </div>
-        <div>
-          <%= form_with model: [@recipe, @post_comment] do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
-          <% end %>
-        </div>
-      </div>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to recipe_favorites_path(@recipe), method: :post do %>
+          ♡<%= @recipe.favorites.count %> いいね
+        <% end %>
+      </p>
+    <% end %>
+    <div>
+      <p>コメント件数：<%= @recipe.post_comments.count %></p>
+      <% @recipe.post_comments.each do |post_comment| %>
+        <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+        <%= post_comment.user.name %>
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+        <% if post_comment.user == current_user %>
+          <%= link_to "削除", recipe_post_comment_path(post_comment.recipe, post_comment), method: :delete %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with model: [@recipe, @post_comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+        <%= f.submit "送信する" %>
+      <% end %>
     </div>
   </div>
 </div>
