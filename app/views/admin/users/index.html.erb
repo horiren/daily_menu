@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+    <br>
+    <br>
+    <div class="row">
+          <div class="col-2">
+            <h4 style="background-color:#DCDCDC">　ユーザー一覧　　</h4>
+          </div>
+        </div>
+    <br>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th style="height: 50px">ユーザーID</th>
+          <th style="height: 50px">ニックネーム</th>
+          <th style="height: 50px">メールアドレス</th>
+        </tr>
+      </thead>
+
+      <% @users.each do |user| %>
+
+      <tbody>
+        <tr>
+          <td style="height: 60px"><%= user.id %></td>
+          <td style="height: 60px"><%= link_to admin_user_path(user.id) do %>
+                                   <%= user.name %>
+                                   <% end %></td>
+          <td style="height: 60px"><%= user.email %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+    <br>
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>
+<br>
+<br>

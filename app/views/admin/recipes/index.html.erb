@@ -1,0 +1,37 @@
+<div class="container px-5 px-sm-0 cake-font">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>レシピ一覧</h2>
+      <div class="row">
+        <% @recipes.each do |recipe| %>
+          <div class="col-md-4">
+            <div class="card-deck">
+              <div class="card" style="width:22rem">
+                <%= link_to admin_recipe_path(recipe) do %>
+                  <div class="img">
+                    <%= image_tag recipe.image, class: "img-fluid w-100 h-200" %>
+                  </div>
+                <% end %>
+                <div class="card-body text-center">
+                  <p>
+                    <% if recipe.user.profile_image.attached? %>
+                      <%= image_tag recipe.user.profile_image, size: "70x70" %>
+                    <% else %>
+                      <%= image_tag 'no_image', size: "70x70" %>
+                    <% end %>
+                    <%= recipe.user.name %>
+                  </p>
+                  <h5 class="card-title"><%= recipe.name %></h5>
+                  <p>
+                    <%= link_to "#{recipe.post_comments.count} コメント", recipe_path(recipe.id) %>
+                    <%= link_to "#{recipe.favorites.count} いいね", recipe_path(recipe.id) %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

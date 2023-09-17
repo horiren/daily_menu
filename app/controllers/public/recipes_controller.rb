@@ -10,8 +10,13 @@ class Public::RecipesController < ApplicationController
   
   def show
     @recipe = Recipe.find(params[:id])
-    @post_comment = PostComment.new
-    @user = @recipe.user
+    if @recipe
+      @post_comment = PostComment.new
+      @user = @recipe.user
+    else
+      flash[:error] = "Recipe not found"
+      redirect_to recipes_path # または他の適切なリダイレクト先
+    end
   end
   
   def edit
@@ -29,8 +34,9 @@ class Public::RecipesController < ApplicationController
   
   def destroy
     recipe = Recipe.find(params[:id])  # データ（レコード）を1件取得
+    user = recipe.user_id
     recipe.destroy  # データ（レコード）を削除
-    redirect_to recipe_path(recipe.id)  # 投稿一覧画面へリダイレクト  
+    redirect_to user_path(user)
   end 
   
   def update
@@ -39,10 +45,19 @@ class Public::RecipesController < ApplicationController
     redirect_to recipe_path(recipe.id)
   end 
   
+  def likes
+    likes = current_user.favorites.pluck(:recipe_id)
+    @like_recipes = Recipe.find(likes)
+  end
+  
   private
   # ストロングパラメータ
   def recipe_params
     params.require(:recipe).permit(:name, :explanation, :comment, :image)
+  end
+  
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
   end
   
 end

@@ -1,1 +1,13 @@
 @use '~bootstrap/scss/bootstrap';
+
+.h-200 {
+  height: 250px;
+}
+
+.card_text_main {
+  a {  
+    text-decoration: none;
+    background-color: transparent;
+    color: black;
+  }
+}

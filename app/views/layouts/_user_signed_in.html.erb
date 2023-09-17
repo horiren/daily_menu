@@ -1,4 +1,6 @@
 <li><%= link_to '投稿', new_recipe_path ,class:'nav-link text-light mx-4 px-4 btn btn-info' %></li>
 <li><%= link_to 'レシピ一覧' , recipes_path, class:'nav-link text-light mx-4 px-4 btn btn-info' %></li>
 <li><%= link_to 'ユーザー詳細', user_path(current_user.id), class:'nav-link text-light mx-4 px-4 btn btn-info' %></li>
+<li><%= link_to 'フォロー一覧', user_followings_path(current_user), class:'nav-link text-light mx-4 px-4 btn btn-info' %></li>
+<li><%= link_to 'いいね一覧', likes_recipe_path(current_user), class:'nav-link text-light mx-4 px-4 btn btn-info' %></li>
 <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'nav-link text-light mx-4 px-4 btn btn-info' %></li>
