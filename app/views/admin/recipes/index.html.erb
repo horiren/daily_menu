@@ -9,22 +9,26 @@
               <div class="card" style="width:22rem">
                 <%= link_to admin_recipe_path(recipe) do %>
                   <div class="img">
-                    <%= image_tag recipe.image, class: "img-fluid w-100 h-200" %>
+                    <%= image_tag recipe.image, class: "img-fluid w-100 h-200" if recipe.image.attached? %>
                   </div>
                 <% end %>
                 <div class="card-body text-center">
-                  <p>
-                    <% if recipe.user.profile_image.attached? %>
-                      <%= image_tag recipe.user.profile_image, size: "70x70" %>
-                    <% else %>
-                      <%= image_tag 'no_image', size: "70x70" %>
+                  <div class="card_text_main">
+                    <%= link_to admin_recipe_path(recipe) do %>
+                      <p>
+                        <% if recipe.user.profile_image.attached? %>
+                          <%= image_tag recipe.user.profile_image, size: "70x70" %>
+                        <% else %>
+                          <%= image_tag 'no_image', size: "70x70" %>
+                        <% end %>
+                        <%= recipe.user.name %>
+                      </p>
+                      <h5 class="card-title"><%= recipe.name %></h5>
                     <% end %>
-                    <%= recipe.user.name %>
-                  </p>
-                  <h5 class="card-title"><%= recipe.name %></h5>
+                  </div>
                   <p>
-                    <%= link_to "#{recipe.post_comments.count} コメント", recipe_path(recipe.id) %>
-                    <%= link_to "#{recipe.favorites.count} いいね", recipe_path(recipe.id) %>
+                    <%= link_to "#{recipe.post_comments.count} コメント", admin_recipe_path(recipe.id) %>
+                    <%= link_to "#{recipe.favorites.count} いいね", admin_recipe_path(recipe.id) %>
                   </p>
                 </div>
               </div>

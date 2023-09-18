@@ -5,6 +5,9 @@ class Recipe < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   
+  validates :image, presence: true
+  
+  
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -15,6 +18,20 @@ class Recipe < ApplicationRecord
   
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
+  end
+  
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @recipe = Recipe.where("name LIKE?","#{word}")
+    elsif search == "forward_match"
+      @recipe = Recipe.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @recipe = Recipe.where("name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @recipe = Recipe.where("name LIKE?","%#{word}%")
+    else
+      @recipe = Recipe.all
+    end
   end
   
 end

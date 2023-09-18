@@ -1,0 +1,36 @@
+<div class="container px-5 px-sm-0 cake-font">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>検索結果</h2>
+    </div>
+    <div class="col-md-6">
+      <%= render "public/serach/serach", recipes: @recipes %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover table-inverse">
+        <!--検索対象モデルがUserの時 -->
+        <% if @range == "User" %>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <% if user.profile_image.attached? %>
+                  <%= link_to image_tag(user.profile_image, size: "100x100"), user_path(user.id) %>
+                <% else %>
+                  <%= link_to image_tag(no_image, size: "100x100"), user_path(user.id) %>
+                <% end %>
+                <%= user.name %>
+              </tr>
+            <% end %>
+          </tbody>
+        <% else %>
+          <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+          <tbody>
+            <%= render "public/recipes/recipe_all", recipes: @recipes %>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div

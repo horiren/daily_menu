@@ -16,21 +16,14 @@
       <p><%=simple_format(@recipe.comment) %></p>
       <div class="row">
         <div class="col-md-6">
-          <%= form_with model: [@recipe, @post_comment] do |f| %>
-            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
-          <% end %>
+          <div class="comment-create">
+	          <%= render partial: 'public/post_comments/form', locals: { post_comment: @post_comment, recipe: @recipe } %>
+	        </div>
         </div>
         <div class="col-md-6">
-          <% if @recipe.favorited_by?(current_user) %>
-            <%= link_to recipe_favorites_path(@recipe), method: :delete do %>
-              ♥<%= @recipe.favorites.count %> いいね
-            <% end %>
-          <% else %>
-            <%= link_to recipe_favorites_path(@recipe), method: :post do %>
-              ♡<%= @recipe.favorites.count %> いいね
-            <% end %>
-          <% end %>
+          <div id="favorite_buttons_<%= @recipe.id %>">
+            <%= render "public/favorites/favorites", recipe: @recipe %>
+          </div>
         </div>
       </div>
     </div>
@@ -41,30 +34,13 @@
       <p><%=simple_format(@recipe.explanation) %></p>
     </div>
     <div class="col-md-3">
-      <%= link_to "編集", edit_recipe_path(@recipe.id) %>
       <% if @recipe.user == current_user %>
-        <%= link_to "削除", recipe_path(@recipe), method: :delete %>
+      <%= link_to "編集", edit_recipe_path(@recipe.id) %>
+      <%= link_to "削除", recipe_path(@recipe), method: :delete %>
       <% end %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <p>コメント件数：<%= @recipe.post_comments.count %></p>
-    </div>
-      <% @recipe.post_comments.each do |post_comment| %>
-        <div class="col-md-3">
-          <%= image_tag post_comment.user.get_profile_image(70,70) %>
-          <%= post_comment.user.name %>
-        </div>
-        <div class="col-md-6">
-          <%= post_comment.comment %>
-        </div>
-        <div class="col-md-3">
-          <% if post_comment.user == current_user %>
-            <%= link_to "削除", recipe_post_comment_path(post_comment.recipe, post_comment), method: :delete %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+  <div id="comments_area">
+    <%= render partial: 'public/post_comments/index', locals: { recipe: @recipe } %>
   </div>
 </div>

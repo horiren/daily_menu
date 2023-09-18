@@ -12,6 +12,7 @@ class Public::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     if @recipe
       @post_comment = PostComment.new
+      @comments = @recipe.post_comments.order(created_at: :desc)
       @user = @recipe.user
     else
       flash[:error] = "Recipe not found"

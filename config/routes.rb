@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root 'homes#top'
-  
+    get "search" => "searches#search"
     resources :recipes do
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get '/' => 'homes#top'
+    get "search" => "searches#search"
     
     resources :recipes
     
