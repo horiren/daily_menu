@@ -22,16 +22,20 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to admin_user_path(@user), notice: "ユーザー情報を更新しました。"
-
+    if @user.update(user_params)
+      # 更新が成功した場合の処理
+      redirect_to admin_user_path(@user), notice: "ユーザー情報が更新されました。"
+    else
+      # 更新が失敗した場合の処理
+      render 'edit'
+    end
   end
 
    private
 
 
 
-  def customer_params
+  def user_params
     params.require(:user).permit(:name, :email, :introduction)
   end
 end

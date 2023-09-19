@@ -1,5 +1,7 @@
 class Public::RecipesController < ApplicationController
   
+  before_action :correct_user, only: [:edit, :updat, :destroy]
+  
   def index
     @recipes = Recipe.all
   end 
@@ -59,6 +61,12 @@ class Public::RecipesController < ApplicationController
   
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+  
+  def correct_user
+    @recipe = Recipe.find(params[:id])
+    @user = @recipe.user
+    redirect_to(recipes_path) unless @user == current_user
   end
   
 end

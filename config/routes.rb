@@ -31,7 +31,10 @@ Rails.application.routes.draw do
     get '/' => 'homes#top'
     get "search" => "searches#search"
     
-    resources :recipes
+    resources :recipes do
+      resources :post_comments, only: [:destroy, :create]
+    end
+    
     
     resources :users, except: [:create, :new]
     
