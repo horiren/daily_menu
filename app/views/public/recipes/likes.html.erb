@@ -1,8 +1,17 @@
 <div class="container px-5 px-sm-0 cake-font">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <h2>いいね一覧</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <%= render "recipe_all", recipes: @like_recipes %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= paginate @like_recipes, class: "pagination" %>
     </div>
   </div>
 </div>

@@ -29,6 +29,9 @@
           <tbody>
             <%= render "public/recipes/recipe_all", recipes: @recipes %>
           </tbody>
+          <tbody>
+            <%= paginate @recipes, class: "pagination" %>
+          </tbody>
         <% end %>
       </table>
     </div>

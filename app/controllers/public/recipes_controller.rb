@@ -3,6 +3,7 @@ class Public::RecipesController < ApplicationController
   before_action :correct_user, only: [:edit, :updat, :destroy]
   
   def index
+    @recipe = Recipe.page(params[:page]).per(30)
     @recipes = Recipe.all
   end 
   
@@ -50,7 +51,7 @@ class Public::RecipesController < ApplicationController
   
   def likes
     likes = current_user.favorites.pluck(:recipe_id)
-    @like_recipes = Recipe.find(likes)
+    @like_recipes = Recipe.where(id: likes).page(params[:page]).per(30)
   end
   
   private

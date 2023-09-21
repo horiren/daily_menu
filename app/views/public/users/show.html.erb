@@ -30,4 +30,9 @@
       <%= render "public/recipes/recipe_all", recipes: @recipes %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= paginate @recipes, class: "pagination" %>
+    </div>
+  </div>
 </div>
