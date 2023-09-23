@@ -7,7 +7,7 @@ class Public::SearchesController < ApplicationController
     if @range == "User"
       @users = User.looks(params[:search], params[:word])
     else
-      @recipes = Recipe.looks(params[:search], params[:word]).page(params[:page]).per(30)
+      @recipes = Recipe.looks(params[:search], params[:word]).order(created_at: :desc).page(params[:page]).per(30)
     end
   end
 end

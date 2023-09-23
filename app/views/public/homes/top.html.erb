@@ -11,7 +11,9 @@
               <p class="text-center">皆さんがが投降したレシピを見ることができます。</p>
               <p class="text-center">レシピの閲覧、投稿をするには会員登録が必要です。</p>
               <p class="text-center">毎日の献立を考えるのに困ってる方、新しい料理を見つけたい方は</p>
-              <p class="text-center">ぜひ、ご利用ください。</p>
+              <% unless current_user&.guest? %>
+                <p class="text-center">ぜひ、ご利用ください。</p>
+              <% end %>
             </div>
           </div>
         </div>

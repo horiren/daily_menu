@@ -3,8 +3,7 @@ class Public::RecipesController < ApplicationController
   before_action :correct_user, only: [:edit, :updat, :destroy]
   
   def index
-    @recipe = Recipe.page(params[:page]).per(30)
-    @recipes = Recipe.all
+    @recipe = Recipe.order(created_at: :desc).page(params[:page]).per(30)
   end 
   
   def new

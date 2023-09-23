@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  devise_for :users,skip: [:passwords], controllers: {
-    registrations: "public/registrations",
+  devise_for :users, controllers: {
+    registrations: 'public/registrations',
     sessions: 'public/sessions'
   }
   
@@ -24,6 +24,10 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+    end
+    
+    devise_scope :user do
+      post 'guest_sign_in', to: 'sessions#guest_sign_in'
     end
   end
   
