@@ -11,3 +11,10 @@
     color: black;
   }
 }
+
+@media screen and (max-width:480px) { 
+  /*　画面サイズが480pxまではここを読み込む　*/
+ .sp-font-size{
+  font-size: 10px;
+ }
+}
