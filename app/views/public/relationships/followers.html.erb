@@ -1,19 +1,23 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-12">
+      <h2>フォロワー一覧</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <% if @users.exists? %>
         <% @users.each do |user| %>
           <div class="row">
             <div class="col-md-6">
-              <td>フォロー数: <%= user.followings.count %></td>
-              <td>フォロワー数: <%= user.followers.count %></td>
+              <td>フォロワー数: <%= current_user.followers.count %></td>
             </div>
             <div class="col-md-6">
               <%= link_to "フォロー一覧", user_followings_path %>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <% if user.profile_image.attached? %>
                 <%= link_to image_tag(user.profile_image, size: "100x100"), user_path(user.id) %>
               <% else %>
