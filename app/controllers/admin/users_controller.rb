@@ -3,13 +3,13 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @users = User.page(params[:page]).per(5)
+    @users = User.page(params[:page]).per(100)
   end
 
   def show
     @user = User.find_by(id: params[:id])
     if @user
-      @recipes = @user.recipes
+      @recipes = @user.recipes.order(created_at: :desc).page(params[:page]).per(30)
     else
       # ユーザーが存在しない場合の処理を追加するか、エラーメッセージを表示するなどの適切な対応を行う
       redirect_to root_path, alert: "ユーザーが存在しません。"
