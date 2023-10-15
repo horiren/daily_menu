@@ -1,9 +1,9 @@
 <div class="container my-3">
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <%= image_tag @recipe.image, size: "550x400" if @recipe.image.attached? %>
+    <div class="col-md-7 mb-3">
+      <%= image_tag @recipe.image, size: "650x400" if @recipe.image.attached? %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <h1><%= @recipe.name %></h1>
       <div>
         <% if @user.profile_image.attached? %>
@@ -16,12 +16,8 @@
         <span class="h3"><%= @user.name %></span>
       </div>
       <p><%=simple_format(@recipe.comment) %></p>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="comment-create">
-	          <%= render 'public/post_comments/form', post_comment: @post_comment, recipe: @recipe %>
-	        </div>
-        </div>
+      <div class="comment-create">
+        <%= render 'public/post_comments/form', post_comment: @post_comment, recipe: @recipe %>
       </div>
     </div>
   </div>
@@ -36,12 +32,12 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 d-flex justify-content-end">
       <% if @recipe.user == current_user %>
-        <%= link_to edit_recipe_path(@recipe.id), class: "btn btn-success" do %>
+        <%= link_to edit_recipe_path(@recipe.id), class: "btn btn-success mx-1" do %>
           <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
         <% end %>
-        <%= link_to recipe_path(@recipe), method: :delete, class: "btn btn-danger" do  %>
+        <%= link_to recipe_path(@recipe), method: :delete, class: "btn btn-danger mx-1" do  %>
           <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
         <% end %>
       <% end %>

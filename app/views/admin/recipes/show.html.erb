@@ -1,9 +1,9 @@
 <div class="container my-3">
   <div class="row">
-    <div class="col-md-6">
-      <%= image_tag @recipe.image, size: "550x400" if @recipe.image.attached?  %>
+    <div class="col-md-7 mb-3">
+      <%= image_tag @recipe.image, size: "650x400" if @recipe.image.attached?  %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <h1><%= @recipe.name %></h1>
       <div>
         <% if @user.profile_image.attached? %>
@@ -22,11 +22,11 @@
     <div class="col-md-8">
       <h3>作り方</h3>
     </div>
-    <div class="col-md-3">
-      <%= link_to edit_admin_recipe_path(@recipe.id), class: "btn btn-success" do %>
+    <div class="col-md-3 d-flex justify-content-end">
+      <%= link_to edit_admin_recipe_path(@recipe.id), class: "btn btn-success mx-1" do %>
         <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
       <% end %>
-      <%= link_to admin_recipe_path(@recipe), method: :delete, class: "btn btn-danger" do %>
+      <%= link_to admin_recipe_path(@recipe), method: :delete, class: "btn btn-danger mx-1" do %>
         <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
       <% end %>
     </div>
@@ -47,7 +47,9 @@
           <%= post_comment.comment %>
         </div>
         <div class="col-md-3">
-          <%= link_to "削除", admin_recipe_post_comment_path(post_comment.recipe, post_comment), method: :delete %>
+          <%= link_to admin_recipe_post_comment_path(post_comment.recipe, post_comment), method: :delete do %>
+            <i class="fa-solid fa-trash-can fa-2xl" style="color: #ca2e07;"></i>
+          <% end %>
         </div>
       <% end %>
     </div>
