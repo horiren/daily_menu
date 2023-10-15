@@ -1,4 +1,4 @@
-<div class="container px-5 px-sm-0">
+<div class="container my-3">
   <div class="row">
     <div class="col-md-6">
       <%= image_tag @recipe.image, size: "550x400" if @recipe.image.attached?  %>
@@ -19,14 +19,20 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <h3>作り方</h3>
-      <p><%=simple_format(@recipe.explanation) %></p>
     </div>
     <div class="col-md-3">
-      <%= link_to "編集", edit_admin_recipe_path(@recipe.id) %>
-      <%= link_to "削除", admin_recipe_path(@recipe), method: :delete %>
+      <%= link_to edit_admin_recipe_path(@recipe.id), class: "btn btn-success" do %>
+        <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+      <% end %>
+      <%= link_to admin_recipe_path(@recipe), method: :delete, class: "btn btn-danger" do %>
+        <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
+      <% end %>
     </div>
+  </div>
+  <div class="row">
+    <p><%=simple_format(@recipe.explanation) %></p>
   </div>
   <div class="row">
     <div class="col-md-12">

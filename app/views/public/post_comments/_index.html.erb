@@ -3,17 +3,21 @@
     <p>コメント件数：<%= recipe.post_comments.count %></p>
   </div>
   <% recipe.post_comments.each do |post_comment| %>
-    <div class="col-md-3">
-      <%= image_tag post_comment.user.get_profile_image(70,70) %>
-      <%= post_comment.user.name %>
-    </div>
-    <div class="col-md-6">
-      <%= simple_format(post_comment.comment) %>
-    </div>
-    <div class="col-md-3">
-      <% if post_comment.user == current_user %>
-        <%= link_to "削除", recipe_post_comment_path(post_comment.recipe, post_comment), method: :delete, remote: true %>
-      <% end %>
+    <div class ="col-md-12 border-top border-bottom row mb-3">
+      <div class="col-md-3 ">
+        <%= image_tag post_comment.user.get_profile_image(50,50) %>
+        <%= post_comment.user.name %>
+      </div>
+      <div class="col-md-6 my-4">
+        <%= simple_format(post_comment.comment) %>
+      </div>
+      <div class="col-md-3 my-4">
+        <% if post_comment.user == current_user %>
+          <%= link_to recipe_post_comment_path(post_comment.recipe, post_comment), method: :delete, remote: true do %>
+            <i class="fa-solid fa-trash-can fa-2xl" style="color: #ca2e07;"></i>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
