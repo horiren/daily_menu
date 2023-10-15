@@ -1,5 +1,5 @@
-<div class="container my-3">
-  <div class="row">
+<div class="container">
+  <div class="row my-3">
     <div class="col-md-6">
       <h2>レシピ一覧</h2>
     </div>
@@ -7,13 +7,13 @@
       <%= render "public/serach/serach" %>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-md-12">
       <%= render "recipe_all", recipes: @recipe %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row mb-3">
+    <div class="col-md-12 d-flex justify-content-center">
       <%= paginate @recipe, class: "pagination" %>
     </div>
   </div>

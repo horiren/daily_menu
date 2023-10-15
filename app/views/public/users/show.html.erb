@@ -1,5 +1,5 @@
-<div class="container my-3">
-  <div class="row">
+<div class="container">
+  <div class="row my-2">
     <div class= "col-md-6">
       <% if @user.profile_image.attached? %>
         <%= image_tag @user.profile_image, size: "100x100" %>
@@ -29,19 +29,19 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-2">
     <div class= "col-md-12">
       <p><%=simple_format(@user.introduction) %></p>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-2">
     <div class="col-md-12">
       <h2>投稿レシピ一覧</h2>
       <%= render "public/recipes/recipe_all", recipes: @recipes %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row mb-2">
+    <div class="col-md-12 d-flex justify-content-center">
       <%= paginate @recipes, class: "pagination" %>
     </div>
   </div>

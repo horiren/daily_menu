@@ -1,5 +1,5 @@
-<div class="container my-3">
-  <div class="row">
+<div class="container">
+  <div class="row my-3">
     <div class="col-md-6">
       <h2>検索結果</h2>
     </div>
@@ -9,9 +9,9 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-hover table-inverse">
-        <!--検索対象モデルがUserの時 -->
-        <% if @range == "User" %>
+      <!--検索対象モデルがUserの時 -->
+      <% if @range == "User" %>
+        <table class="table table-hover table-inverse">
           <tbody>
             <% @users.each do |user| %>
               <tr>
@@ -26,16 +26,20 @@
               </tr>
             <% end %>
           </tbody>
-        <% else %>
-          <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
-          <tbody>
+        </table>
+      <% else %>
+        <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+        <div class="row mb-3">
+          <div class="col-md-12">
             <%= render "admin/recipes/admin_recipe_all", recipes: @recipes %>
-          </tbody>
-          <tbody>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12 d-flex justify-content-center">
             <%= paginate @recipes, class: "pagination" %>
-          </tbody>
-        <% end %>
-      </table>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

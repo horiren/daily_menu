@@ -1,16 +1,16 @@
-<div class="container my-3">
-  <div class="row">
+<div class="container">
+  <div class="row my-3">
     <div class="col-md-6">
       <h2>いいね一覧</h2>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-md-12">
       <%= render "recipe_all", recipes: @like_recipes %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row mb-3">
+    <div class="col-md-12 d-flex justify-content-center">
       <%= paginate @like_recipes, class: "pagination" %>
     </div>
   </div>

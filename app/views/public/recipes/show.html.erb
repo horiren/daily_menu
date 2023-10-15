@@ -1,7 +1,7 @@
-<div class="container my-3">
-  <div class="row">
-    <div class="col-md-7 mb-3">
-      <%= image_tag @recipe.image, size: "650x450" if @recipe.image.attached? %>
+<div class="container">
+  <div class="row my-3">
+    <div class="col-md-7">
+      <%= image_tag @recipe.image, class:"img-fluid w-100 w-sm-100 w-md-100 w-lg-100" if @recipe.image.attached? %>
     </div>
     <div class="col-md-5">
       <h1><%= @recipe.name %></h1>
@@ -21,8 +21,8 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-5">
+  <div class="row mb-2">
+    <div class="col-md-8">
       <h3>作り方</h3>
     </div>
     <div class="col-md-4">
@@ -43,12 +43,16 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
-    <p><%=simple_format(@recipe.explanation) %></p>
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <p><%=simple_format(@recipe.explanation) %></p>
+    </div>
   </div>
-  <div class=row>
-    <div id="comments_area">
-      <%= render 'public/post_comments/index', recipe: @recipe %>
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <div id="comments_area">
+        <%= render 'public/post_comments/index', recipe: @recipe %>
+      </div>
     </div>
   </div>
 </div>

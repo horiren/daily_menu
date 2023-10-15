@@ -1,16 +1,16 @@
 <div class="row">
   <% recipes.each do |recipe| %>
-    <div class="col-md-4">
+    <div class="col-md-4 d-flex justify-content-center">
       <div class="card-deck">
         <div class="card" style="width:22rem">
           <%= link_to recipe_path(recipe) do %>
             <div class="img">
-              <%= image_tag recipe.image, class: "img-fluid w-100 h-200" if recipe.image.attached? %>
+              <%= image_tag recipe.image, class: "img-fluid w-100 w-sm-100 w-md-100 w-lg-100" if recipe.image.attached? %>
             </div>
           <% end %>
-            <div class="card-body text-center">
-              <div class="card_text_main">
-                <%= link_to recipe_path(recipe) do %>
+          <div class="card-body text-center">
+            <div class="card_text_main">
+              <%= link_to recipe_path(recipe) do %>
                 <p>
                   <% if recipe.user.profile_image.attached? %>
                     <%= image_tag recipe.user.profile_image, size: "70x70" %>
